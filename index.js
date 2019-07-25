@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter, routerMiddleware } from "connected-react-router";
-import combineReducers from './combineReducers';
-import configStore from './configStore';
-import { promiseMiddle } from './middleware';
-import { isArray, isFunction, isObject } from './utils';
-import * as helper from './helper';
-export { bootoConnect as connect} from './connect';
+import combineReducers from './src/combineReducers';
+import configStore from './src/configStore';
+import { promiseMiddle } from './src/middleware';
+import { isArray, isFunction, isObject } from './src/utils';
+import * as helper from './src/helper';
+export { bootoConnect as connect} from './src/connect';
 
-var BootoNumber = 0;
+let BootoNumber = 0;
 
 function Booto(){
 
@@ -51,8 +51,6 @@ Booto.prototype.setup = function(conf){
     this.state = helper.createMultiModuleState(conf);
     stateReducerMap = helper.createMultiSRMap(conf);
   }
-
-  console.log('this.state',this.state);
 
   // reducers combine
   let finalStateReducerMap = helper.withRouterSR(stateReducerMap, this.history);

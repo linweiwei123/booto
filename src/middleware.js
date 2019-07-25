@@ -1,16 +1,19 @@
+import { isPromise } from './utils';
 
-export const actionRecordMiddleWare = store => next => action =>{
-  if(action.type !== 'user/history/add'){
-    store.dispatch({
-      type: 'user/history/add',
-      payload: {
-        action: action.type,
-        time: new Date().getTime()
-      }
-    });
-    next(action)
+export const promiseMiddle = (store) => (next) => (action) => {
+  if(!isPromise(action.payload)){
+    return next(action);
   }
-  else {
-    next(action)
-  }
+
+  action.payload
+    .then((res) => {
+      action.payload = res;
+      store.dispatch(action);
+    })
+    .catch((err) => {
+      action.isError = true;
+      action.payload = err;
+      store.dispatch(action);
+    })
+
 };

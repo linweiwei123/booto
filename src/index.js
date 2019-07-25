@@ -1,45 +1,22 @@
-import React from 'react';
-import './index.css';
-import booto from './booto/index';
-import App from './App';
-import { createLogger } from 'redux-logger';
-import { actionRecordMiddleWare } from './middleware';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-booto.setup([
-  {
-    module: 'counter',
-    state: {
-      count: 0
-    },
-    reducers: {
-      count: {
-        add: count => count + 1,
-        minus: count => count - 1,
-        resetCount: (count, payload) => payload
-      }
-    }
-  },
-  {
-    module: 'user',
-    state: {
-      history: []
-    },
-    reducers: {
-      history: {
-        add: (history = [], payload) => payload ? [...history, payload] : history
-      }
-    }
+import styles from './styles.css'
+
+export default class ExampleComponent extends Component {
+  static propTypes = {
+    text: PropTypes.string
   }
-]);
 
-booto.use(createLogger());
-booto.use(actionRecordMiddleWare);
-booto.start(<App/>,'#root');
+  render() {
+    const {
+      text
+    } = this.props
 
-const store = booto.store;
-store.subscribe(() => {
-  console.log('变化了');
-  console.log(store.getState());
-});
-
-console.log('booto',booto);
+    return (
+      <div className={styles.test}>
+        Example Component: {text}
+      </div>
+    )
+  }
+}

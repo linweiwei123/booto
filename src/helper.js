@@ -13,7 +13,7 @@ export function createSingleSRMap(conf) {
   const reducerKeys = Object.keys(reducers);
   const stateReducerMap = {};
 
-  // 将多层级转换为一级map形式，type-reducer形式
+  // change to type-reducer map
   reducerKeys.forEach(key => {
     let fnsObj = reducers[key];
     let fnNames = Object.keys(fnsObj);

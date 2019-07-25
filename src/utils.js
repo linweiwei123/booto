@@ -1,16 +1,3 @@
-export function mergeObject(target, source){
-  let targetKeys = Object.keys(target);
-
-  targetKeys.forEach( key => {
-    if(typeof source[key] !== 'undefined'){
-      target[key] = source[key]
-    }
-    else {
-      target[key] = null
-    }
-  })
-}
-
 export function isType(target, type){
   return Object.prototype.toString.call(target).toLowerCase() === `[object ${type}]`;
 }
