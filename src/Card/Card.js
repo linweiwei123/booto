@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from '../wad';
+import { connect } from '../booto';
 
 const Card = (props) => {
 

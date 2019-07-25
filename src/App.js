@@ -1,24 +1,33 @@
 import React from 'react';
-import './App.css';
-import Card from './Card/Card'
-import User from './User/User'
-import { connect } from './wad';
+import { Route, Switch } from 'react-router';
+import Home from './Home/Home';
+import User from './User/User';
+import connect from 'react-redux/es/connect/connect';
 
-function App(props) {
+const routes = [
+  {
+    path: '/',
+    component: Home,
+    options: {
+      exact: true
+    }
+  },
+  {
+    path: '/user',
+    component: User,
+  },
+];
+
+function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        Learn React
-      </header>
-      <div>{props.count}</div>
-      <button onClick={() => props.dispatch('counter/count/add')}>Add</button>
-      <button onClick={() => props.dispatch('counter/count/minus')}>minus</button>
-      <Card/>
-      <User/>
-    </div>
+    <Switch>
+      {
+        routes.map((item, index) => {
+          return <Route key={index} path={item.path} component={item.component} {...item.options} />
+        })
+      }
+    </Switch>
   );
 }
 
-export default connect(
-  ({counter}) => ({count: counter.count})
-)(App);
+export default connect()(App);

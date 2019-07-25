@@ -1,12 +1,11 @@
 import React from 'react';
 import './index.css';
-import wad from './wad/index';
+import booto from './booto/index';
 import App from './App';
 import { createLogger } from 'redux-logger';
 import { actionRecordMiddleWare } from './middleware';
 
-// 设置App全局状态
-wad.setup([
+booto.setup([
   {
     module: 'counter',
     state: {
@@ -14,45 +13,33 @@ wad.setup([
     },
     reducers: {
       count: {
-        add: count => {
-          console.log('运行了add', new Date().getTime());
-          return count + 1;
-        },
-        minus: count => {
-          console.log('运行了minus');
-          return count - 1;
-        },
-        resetCount: (count, payload) => {
-          return payload
-        }
+        add: count => count + 1,
+        minus: count => count - 1,
+        resetCount: (count, payload) => payload
       }
     }
   },
   {
     module: 'user',
     state: {
-      updateTimes: []
+      history: []
     },
     reducers: {
       history: {
-        add: (updateTimes, payload) => payload ? [...updateTimes, payload] : updateTimes
+        add: (history = [], payload) => payload ? [...history, payload] : history
       }
     }
   }
 ]);
 
-wad.use([createLogger()]);
-// wad.use(actionRecordMiddleWare);
+booto.use(createLogger());
+booto.use(actionRecordMiddleWare);
+booto.start(<App/>,'#root');
 
-//app.router();
-
-// 渲染页面
-wad.start(App,'#root');
-
-const store = wad.store;
+const store = booto.store;
 store.subscribe(() => {
   console.log('变化了');
   console.log(store.getState());
 });
 
-console.log(wad);
+console.log('booto',booto);

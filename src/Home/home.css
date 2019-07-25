@@ -30,3 +30,10 @@
     transform: rotate(360deg);
   }
 }
+
+.link{
+  margin-top: 20px;
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}

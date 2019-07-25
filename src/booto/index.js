@@ -1,28 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Route, Router, Switch } from 'react-router';
 import { createBrowserHistory } from 'history';
+import { ConnectedRouter, routerMiddleware } from "connected-react-router";
 import combineReducers from './combineReducers';
 import configStore from './configStore';
 import { promiseMiddle } from './middleware';
 import { isArray, isFunction, isObject } from './utils';
 import * as helper from './helper';
-export { wadConnect as connect} from './connect';
-// import { ConnectedRouter } from "connected-react-router";
+export { bootoConnect as connect} from './connect';
 
-var WadNumber = 0;
+var BootoNumber = 0;
 
-function Wad(){
+function Booto(){
 
-  if(WadNumber === 1){
-    throw new Error('Wad can new only once!');
+  if(BootoNumber === 1){
+    throw new Error('Booto can new only once!');
   }
 
-  WadNumber = 1;
+  BootoNumber = 1;
 
-  this.middleWares = [promiseMiddle];
   this.history = createBrowserHistory();
+  this.middleWares = [routerMiddleware(this.history),promiseMiddle];
 }
 
 /**
@@ -34,7 +33,7 @@ function Wad(){
  * }
  * @param conf
  */
-Wad.prototype.setup = function(conf){
+Booto.prototype.setup = function(conf){
 
   if(!isArray(conf) && !isObject(conf)){
     throw new Error('conf must be array or object');
@@ -53,12 +52,15 @@ Wad.prototype.setup = function(conf){
     stateReducerMap = helper.createMultiSRMap(conf);
   }
 
+  console.log('this.state',this.state);
+
   // reducers combine
-  this.reducers = combineReducers(stateReducerMap);
+  let finalStateReducerMap = helper.withRouterSR(stateReducerMap, this.history);
+  this.reducers = combineReducers(finalStateReducerMap);
 
 };
 
-Wad.prototype.use = function (middleWares) {
+Booto.prototype.use = function (middleWares) {
   if(isArray(middleWares)){
     this.middleWares = this.middleWares.concat(middleWares)
   }
@@ -67,23 +69,21 @@ Wad.prototype.use = function (middleWares) {
   }
 };
 
-Wad.prototype.start = function (AppComponent, root) {
+Booto.prototype.start = function (AppComponent, root) {
   // 创建store
   this.store = configStore(this.state, this.reducers, this.middleWares);
 
   let rootElement = document.querySelector(root);
   const AppWrapper = (
     <Provider store={this.store}>
-      <Router history={this.history}>
-        <Switch>
-          <Route path={"/"} exact={true} component={AppComponent}></Route>
-        </Switch>
-      </Router>
+      <ConnectedRouter history={this.history}>
+        {AppComponent}
+      </ConnectedRouter >
     </Provider>
   );
   ReactDOM.render(AppWrapper, rootElement);
 };
 
-const wad = new Wad();
+const booto = new Booto();
 
-export default wad;
+export default booto;

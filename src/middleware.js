@@ -1,13 +1,16 @@
 
 export const actionRecordMiddleWare = store => next => action =>{
-  console.log(action);
   if(action.type !== 'user/history/add'){
-    // store.dispatch(action)
+    store.dispatch({
+      type: 'user/history/add',
+      payload: {
+        action: action.type,
+        time: new Date().getTime()
+      }
+    });
+    next(action)
   }
-  // else{
-  //   store.dispatch({
-  //     type: 'user/history/add',
-  //     payload: new Date().getTime()
-  //   });
-  // }
+  else {
+    next(action)
+  }
 };

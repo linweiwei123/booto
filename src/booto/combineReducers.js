@@ -1,29 +1,19 @@
 import { deepExtend } from './utils';
 
 export default function combineReducers(reducers){
-
-  let isFirstReduce = true;
+  const reducerKeys = Object.keys(reducers);
 
   return function combination(preState = {}, action){
-
-    var nextState;
     const stateDiff = {};
+    let nextState;
     let hasChanged = false;
-
-    if(isFirstReduce){
-      isFirstReduce = false;
-      return preState;
-    }
-
-    const { module, state } = splitActionType(action.type);
-
-    let reducerKeys = Object.keys(reducers);
 
     for(let i=0; i<reducerKeys.length; i++){
       let reducerKey = reducerKeys[i];
 
-      // find the target action
-      if(action.type === reducerKey){
+      // execute the booto way reducers
+      if(action.type === reducerKey && isBootoActionType(reducerKey)){
+        const { module, state } = splitActionType(action.type);
         const iModule = splitActionType(reducerKey).module;
         const iState = splitActionType(reducerKey).state;
         if(typeof stateDiff[iModule] === 'undefined'){
@@ -37,17 +27,24 @@ export default function combineReducers(reducers){
         hasChanged = hasChanged || nextStateForKey !== preStateForKey;
         break;
       }
+
+      // support redux way reducer
+      if(!isBootoActionType(reducerKey)){
+        const reducer = reducers[reducerKey];
+        const preStateForKey = preState[reducerKey];
+        const nextStateForKey = reducer(preStateForKey, action);
+        stateDiff[reducerKey] = nextStateForKey;
+        hasChanged = hasChanged || nextStateForKey !== preStateForKey;
+        break;
+      }
     }
-
     nextState = deepExtend({}, preState, stateDiff);
-
     return hasChanged ? nextState : preState;
   }
-
 }
 
 /**
- * 解析成path、state、method
+ * analyse booto type to {path state method}
  * @param actionType
  * @return {*|string}
  */
@@ -63,4 +60,9 @@ function splitActionType(actionType) {
     state,
     reducerName
   };
+}
+
+function isBootoActionType(actionType) {
+  if(!actionType) return false;
+  return actionType.split('/').length === 3;
 }

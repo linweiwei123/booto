@@ -1,4 +1,5 @@
 import { deepExtendArrayType } from './utils';
+import { connectRouter } from 'connected-react-router'
 
 export function createSingleModuleState(conf){
   const { module, state } = conf;
@@ -45,4 +46,11 @@ export function createMultiSRMap(conf){
   deepExtendArrayType(mergedReducer, mergedReducerArr);
 
   return mergedReducer;
+}
+
+export function withRouterSR(reducer, history) {
+  let routerReducer = {
+    router: connectRouter(history),
+  };
+  return Object.assign(reducer, routerReducer);
 }
