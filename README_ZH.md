@@ -10,11 +10,11 @@ Booto 是一个极易使用的为react应用设计的框架，他基于react、r
 booto其实非常简单，只有百来行代码，没有魔法，没有晦涩难懂的函数与概念。实际上是对redux的简单描述，如能看了源码会对redux有清晰的理解。
 
 ## Features
-🎽 只有3个api
-🕋 按模块划分state与reducer
-🎭 支持同步、异步action
-🛣️ 方便访问路由状态
-🌆 任何redux的方法和属性都能访问，容易扩展
+🎽 只有3个api  
+🕋 按模块划分state与reducer  
+🎭 支持同步、异步action  
+🛣️ 方便访问路由状态  
+🌆 任何redux的方法和属性都能访问，容易扩展  
 🎨 保留中间件机制，兼容redux社区中间件，自定义中间件等
 
 ## Install

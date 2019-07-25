@@ -10,11 +10,11 @@ Booto is a easy to use framework for react applications. It's base by react, red
 It's written by simple way and no magic, just about 200 lines of easy code, please be pleasure to try.  
 
 ## Features
-🎽 Just 3 simple api
-🕋 Divide state and reducer by module
-🎭 Support sync and async action(of course, it's easy)
-🛣️ Easy to use history api to route
-🌆 All the redux api can be accessed
+🎽 Just 3 simple api  
+🕋 Divide state and reducer by module   
+🎭 Support sync and async action(of course, it's easy)  
+🛣️ Easy to use history api to route  
+🌆 All the redux api can be accessed  
 🎨 Retain middleware, support redux community middlewares and customer.
 
 ## Install
