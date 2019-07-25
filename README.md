@@ -6,6 +6,8 @@ English | [中文](./README_ZH.md)
 
 Booto is a easy to use framework for react applications. It's base by react, redux and react-router.If you think redux is too cumbersome and your programming ideas are often interrupted, booto is design for you. Booto is a little same like [Dva](https://github.com/dvajs/dva) and [mirror](https://github.com/mirrorjs/mirror), but booto is much more simple, easy to learn, and seamless to use if you are a react user already. 
 
+[full use demo](https://stackblitz.com/edit/react-2q2uoa)
+
 ## Author speak
 It's written by simple way and no magic, just about 200 lines of easy code, please be pleasure to try.  
 

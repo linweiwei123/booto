@@ -4,7 +4,7 @@
   "description": "",
   "author": "",
   "license": "MIT",
-  "repository": "/booto",
+  "repository": "https://github.com/linweiwei123/booto",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
