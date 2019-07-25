@@ -20,13 +20,24 @@ const routes = [
 
 function App() {
   return (
-    <Switch>
-      {
-        routes.map((item, index) => {
-          return <Route key={index} path={item.path} component={item.component} {...item.options} />
-        })
-      }
-    </Switch>
+    <div>
+      <header className="App-header">
+        Learn Booto
+      </header>
+      <div className="main">
+        <Switch>
+          {
+            routes.map((item, index) =>
+              <Route
+                key={index}
+                path={item.path}
+                component={item.component}
+                {...item.options}
+              /> )
+          }
+        </Switch>
+      </div>
+    </div>
   );
 }
 

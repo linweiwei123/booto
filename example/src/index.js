@@ -38,8 +38,5 @@ booto.start(<App/>,'#root');
 
 const store = booto.store;
 store.subscribe(() => {
-  console.log('变化了');
   console.log(store.getState());
 });
-
-console.log('booto',booto);

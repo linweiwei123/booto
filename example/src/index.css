@@ -11,3 +11,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+*{
+  font-size: 24px;
+  text-align: center;
+}
+
+#root{
+  text-align: center;
+}
+
+.App-header{
+  height: 60px;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 3px rgba(221,221,221,0.5);
+  line-height: 60px;
+}
+
+.main{
+  max-width: 800px;
+  margin: auto;
+}
+
+.time{
+  margin-right: 15px;
+}
+
+.home{
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.link{
+  margin-top: 20px;
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
+
+button{
+ margin-right: 25px;
+  margin-top: 30px;
+}

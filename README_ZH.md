@@ -6,8 +6,8 @@
 
 Booto 是一个极易使用的为react应用设计的框架，他基于react、redux、react-router。主要解决redux繁琐使用的问题，如果你也认为redux概念太多，使用繁琐🙁，并且经常把编程思路打乱那么booto可能是你的菜。他跟[Dva](https://github.com/dvajs/dva)、[mirror](https://github.com/mirrorjs/mirror)有点类似，但是实现更佳简单，易于理解，便于快速开发react应用。
 
-## Warning
-booto目前仅用了2天时间开发完成，它还需与时间去锤炼
+## 作者说
+booto其实非常简单，只有百来行代码，没有魔法，没有晦涩难懂的函数与概念。实际上是对redux的简单描述，如能看了源码会对redux有清晰的理解。
 
 ## Features
 🎽 只有3个api
