@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Card from './Card/Card'
+import User from './User/User'
+import { connect } from './wad';
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        Learn React
       </header>
+      <div>{props.count}</div>
+      <button onClick={() => props.dispatch('counter/count/add')}>Add</button>
+      <button onClick={() => props.dispatch('counter/count/minus')}>minus</button>
+      <Card/>
+      <User/>
     </div>
   );
 }
 
-export default App;
+export default connect(
+  ({counter}) => ({count: counter.count})
+)(App);
