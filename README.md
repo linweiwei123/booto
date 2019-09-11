@@ -18,6 +18,7 @@ It's written by simple way and no magic, just about 200 lines of easy code, plea
 🛣️ Easy to use history api to route  
 🌆 All the redux api can be accessed  
 🎨 Retain middleware, support redux community middlewares and customer.
+🎗️ support typescript
 
 ## Install
 
